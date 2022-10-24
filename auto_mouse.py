@@ -7,15 +7,16 @@ import pyautogui as gui
 def is_within_time(start_time: datetime.datetime, time: int) -> bool:
     if start_time + datetime.timedelta(minutes=time) < datetime.datetime.now():
         return False
-    
+
     time_left = (start_time + datetime.timedelta(minutes=time)) - datetime.datetime.now()
-    print("time left:", time_left)
+    time_left_str = str(time_left).split(".")[0]
+    print("time left:", time_left_str, end="\r")
     return True
 
 def random_coord() -> tuple[int,int]:
     return random.randint(600, 700), random.randint(200, 600)
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--time", type=int)
     args = parser.parse_args()
@@ -23,7 +24,7 @@ def main():
     run_time = 10
     if args.time:
         run_time = args.time
-    
+
     start_time = datetime.datetime.now()
 
     while is_within_time(start_time, run_time):
