@@ -18,12 +18,10 @@ def random_coord() -> tuple[int,int]:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--time", type=int)
+    parser.add_argument("--time", default=10, type=int)
     args = parser.parse_args()
 
-    run_time = 10
-    if args.time:
-        run_time = args.time
+    run_time = args.time
 
     start_time = datetime.datetime.now()
 
