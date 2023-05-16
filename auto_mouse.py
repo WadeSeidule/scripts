@@ -2,6 +2,7 @@ import time
 import datetime
 import random
 import argparse
+from typing import Tuple
 import pyautogui as gui
 
 def is_within_time(start_time: datetime.datetime, time: int) -> bool:
@@ -13,19 +14,17 @@ def is_within_time(start_time: datetime.datetime, time: int) -> bool:
     print("time left:", time_left_str, end="\r")
     return True
 
-def random_coord() -> tuple[int,int]:
+def random_coord() -> Tuple[int,int]:
     return random.randint(600, 700), random.randint(200, 600)
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--time", default=10, type=int)
+    parser.add_argument("run_time", type=int)
     args = parser.parse_args()
-
-    run_time = args.time
 
     start_time = datetime.datetime.now()
 
-    while is_within_time(start_time, run_time):
+    while is_within_time(start_time, args.run_time):
         x, y = random_coord()
         gui.moveTo(x, y, .5)
         time.sleep(2)
